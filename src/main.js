@@ -5,6 +5,7 @@ import { getImages } from './js/pixabay-api';
 
 const submitForm = document.querySelector('.submitForm');
 const searchInput = document.querySelector('.searchInput');
+const loader = document.querySelector('.loader');
 
 submitForm.addEventListener('submit', event => {
   event.preventDefault();
@@ -22,5 +23,9 @@ submitForm.addEventListener('submit', event => {
     return;
   }
 
+  // loader.classList.remove('hidden');
+
   getImages();
+
+  // loader.classList.add('hidden');
 });
