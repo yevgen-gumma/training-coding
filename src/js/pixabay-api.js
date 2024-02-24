@@ -1,16 +1,16 @@
 import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
+import { render } from './render-functions';
 
 const searchInput = document.querySelector('.searchInput');
 
 const KEY = '42324270-89622daef349524aeb531ebd1';
 const BASE_URL = 'https://pixabay.com/api/';
-const additionalParams =
-  'image_type=photo&orientation=horizontal&safesearch=true';
+const otherParams = 'image_type=photo&orientation=horizontal&safesearch=true';
 
 export function getImages() {
   const query = searchInput.value.trim();
-  const LINK = `${BASE_URL}?key=${KEY}&q=${query}&${additionalParams}`;
+  const LINK = `${BASE_URL}?key=${KEY}&q=${query}&${otherParams}`;
 
   return fetch(LINK)
     .then(response => {
@@ -30,10 +30,11 @@ export function getImages() {
           messageColor: 'white',
           backgroundColor: 'green',
         });
-        return;
+      } else {
+        render(data.hits);
       }
     })
     .catch(error => {
-      alert('Error while fetching images');
+      alert('Error while rendering images');
     });
 }
